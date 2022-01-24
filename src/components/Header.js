@@ -1,14 +1,14 @@
 import React from "react";
 
-const NavBar = () => {
+const Header = () => {
   return (
-    <span>
+    <div className="header">
       <p>How to play</p>
       <h1>WORDLE</h1>
       <p>Stats</p>
       <p>Settings</p>
-    </span>
+    </div>
   );
 };
 
-export default NavBar;
+export default Header;
