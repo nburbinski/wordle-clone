@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import Board from "./components/board/Board";
 import Header from "./components/Header";
 import Keyboard from "./components/keyboard/Keyboard";
-import POSSIBLEWORDS from "./const/POSSIBLEWORDS";
-import ACTUALWORDS from "./const/ACTUALWORDS";
+import { POSSIBLEWORDS } from "./const/POSSIBLEWORDS";
+import { ACTUALWORDS } from "./const/ACTUALWORDS";
+import { status } from "./util/status";
 import "./index.css";
 
 const App = () => {
-  const [currentGuess, setCurrentGuess] = useState("PO");
-  const [guesses, setGuesses] = useState(["Tiger"]);
+  const [currentGuess, setCurrentGuess] = useState("");
+  const [guesses, setGuesses] = useState([]);
   const [gameOver, setGameOver] = useState(false);
+  const [statuses, setStatuses] = useState([]);
   const correctWord = "POWER";
 
   const onChar = (value) => {
@@ -35,16 +37,20 @@ const App = () => {
       setGameOver(true);
     }
 
+    setStatuses([...statuses, status(currentGuess, correctWord)]);
+
     setGuesses([...guesses, currentGuess]);
     setCurrentGuess("");
   };
 
-  const checkWord = (word) => {};
-
   return (
     <div className="wordle">
       <Header></Header>
-      <Board currentGuess={currentGuess} guesses={guesses}></Board>
+      <Board
+        currentGuess={currentGuess}
+        guesses={guesses}
+        statuses={statuses}
+      ></Board>
       <Keyboard
         onDelete={onDelete}
         onEnter={onEnter}
