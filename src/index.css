@@ -81,12 +81,15 @@
 
 .YES {
   background-color: green;
+  color: #000;
 }
 
 .NO {
   background-color: #3a3a3c;
+  color: #000;
 }
 
 .KINDA {
   background-color: yellow;
+  color: #000;
 }

@@ -3,7 +3,7 @@ import React from "react";
 const Tile = ({ value, status }) => {
   return (
     <div className={`tile ${status}`}>
-      <p>{value}</p>
+      <p className={` ${status}`}>{value}</p>
     </div>
   );
 };
