@@ -5,6 +5,7 @@ import Keyboard from "./components/keyboard/Keyboard";
 import { POSSIBLEWORDS } from "./const/POSSIBLEWORDS";
 import { ACTUALWORDS } from "./const/ACTUALWORDS";
 import { status } from "./util/status";
+import { getWordOfDay } from "./util/wordOfTheDay";
 import "./index.css";
 
 const App = () => {
@@ -12,7 +13,7 @@ const App = () => {
   const [guesses, setGuesses] = useState([]);
   const [gameOver, setGameOver] = useState(false);
   const [statuses, setStatuses] = useState([]);
-  const correctWord = "POWER";
+  const correctWord = getWordOfDay();
 
   const onChar = (value) => {
     if (gameOver) {
