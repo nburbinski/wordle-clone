@@ -25,6 +25,8 @@ export const alphabet = [
   "X",
   "Y",
   "Z",
+  "ENTER",
+  "BACK",
 ];
 
 export const statusOfLetters = Array.from(alphabet);
