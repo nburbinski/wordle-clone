@@ -31,6 +31,12 @@ const App = () => {
     if (currentGuess.length < 5) {
       console.log("not long enough");
       return;
+    } else if (
+      !POSSIBLEWORDS.includes(currentGuess.toLowerCase()) &&
+      !ACTUALWORDS.includes(currentGuess.toLowerCase())
+    ) {
+      console.log("not valid word");
+      return;
     }
 
     if (currentGuess.toUpperCase() === correctWord) {

@@ -1,4 +1,4 @@
-export const REALWORDS = [
+export const ACTUALWORDS = [
   "cigar",
   "rebut",
   "sissy",
