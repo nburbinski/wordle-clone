@@ -8,6 +8,7 @@ import { status } from "./util/status";
 import { getWordOfDay } from "./util/wordOfTheDay";
 import "./index.css";
 import Alert from "./components/Alert";
+import HowToModal from "./components/modals/HowToModal";
 
 const App = () => {
   const [currentGuess, setCurrentGuess] = useState("");
@@ -16,6 +17,7 @@ const App = () => {
   const [statuses, setStatuses] = useState([]);
   const [correctWord, setCorrectWord] = useState("");
   const [error, setError] = useState("");
+  const [howToModalOpen, setHowToModalOpen] = useState(false);
 
   useEffect(() => {
     setCorrectWord(getWordOfDay);
@@ -26,7 +28,7 @@ const App = () => {
     setError(message);
     setTimeout(() => {
       setError(false);
-    }, 3200);
+    }, 2500);
   };
 
   const onChar = (value) => {
@@ -44,13 +46,13 @@ const App = () => {
 
   const onEnter = () => {
     if (currentGuess.length < 5) {
-      errorMessage("Word not long enough");
+      errorMessage("Not enough letters");
       return;
     } else if (
       !POSSIBLEWORDS.includes(currentGuess.toLowerCase()) &&
       !ACTUALWORDS.includes(currentGuess.toLowerCase())
     ) {
-      errorMessage("Not a valid word");
+      errorMessage("Not in word list");
       return;
     }
 
@@ -66,8 +68,12 @@ const App = () => {
 
   return (
     <div className="wordle">
-      <Header></Header>
+      <Header setHowToModalOpen={setHowToModalOpen}></Header>
       <Alert message={error}></Alert>
+      <HowToModal
+        setOpen={setHowToModalOpen}
+        open={howToModalOpen}
+      ></HowToModal>
       <Board
         currentGuess={currentGuess}
         guesses={guesses}

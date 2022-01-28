@@ -2,9 +2,21 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: #000;
+  background-color: #121213;
   color: #fff;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
 .board {
@@ -22,9 +34,19 @@
 }
 
 .header {
+  margin: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 2px solid #3a3a3c;
+}
+
+.headerTag {
+  margin: 5px;
+}
+
+.headerTag:hover {
+  cursor: pointer;
 }
 
 .tile {
@@ -80,18 +102,15 @@
 }
 
 .YES {
-  background-color: green;
-  color: #000;
+  background-color: rgb(83, 141, 78);
 }
 
 .NO {
-  background-color: #3a3a3c;
-  color: #000;
+  background-color: rgb(58, 58, 60);
 }
 
 .KINDA {
-  background-color: yellow;
-  color: #000;
+  background-color: rgb(181, 159, 59);
 }
 
 .alert {
@@ -107,4 +126,35 @@
   padding: 16px;
   border-radius: 4px;
   font-weight: 700;
+}
+
+.modal {
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.modalContent {
+  margin: 1% 40%;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.modalClose {
+  position: absolute;
+  right: 0;
+}
+
+section > p {
+  margin: 1em;
 }
