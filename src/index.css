@@ -93,3 +93,18 @@
   background-color: yellow;
   color: #000;
 }
+
+.alert {
+  z-index: 1000;
+  background-color: #fff;
+  color: #000;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  pointer-events: none;
+  width: fit-content;
+  padding: 16px;
+  border-radius: 4px;
+  font-weight: 700;
+}
