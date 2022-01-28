@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Board from "./components/board/Board";
 import Header from "./components/Header";
 import Keyboard from "./components/keyboard/Keyboard";
@@ -7,13 +7,27 @@ import { ACTUALWORDS } from "./const/ACTUALWORDS";
 import { status } from "./util/status";
 import { getWordOfDay } from "./util/wordOfTheDay";
 import "./index.css";
+import Alert from "./components/Alert";
 
 const App = () => {
   const [currentGuess, setCurrentGuess] = useState("");
   const [guesses, setGuesses] = useState([]);
   const [gameOver, setGameOver] = useState(false);
   const [statuses, setStatuses] = useState([]);
-  const correctWord = getWordOfDay();
+  const [correctWord, setCorrectWord] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    setCorrectWord(getWordOfDay);
+  }, []);
+
+  // Changes error state
+  const errorMessage = (message) => {
+    setError(message);
+    setTimeout(() => {
+      setError(false);
+    }, 3200);
+  };
 
   const onChar = (value) => {
     if (gameOver) {
@@ -30,13 +44,13 @@ const App = () => {
 
   const onEnter = () => {
     if (currentGuess.length < 5) {
-      console.log("not long enough");
+      errorMessage("Word not long enough");
       return;
     } else if (
       !POSSIBLEWORDS.includes(currentGuess.toLowerCase()) &&
       !ACTUALWORDS.includes(currentGuess.toLowerCase())
     ) {
-      console.log("not valid word");
+      errorMessage("Not a valid word");
       return;
     }
 
@@ -53,6 +67,7 @@ const App = () => {
   return (
     <div className="wordle">
       <Header></Header>
+      <Alert message={error}></Alert>
       <Board
         currentGuess={currentGuess}
         guesses={guesses}
