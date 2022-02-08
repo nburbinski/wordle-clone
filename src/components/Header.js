@@ -1,6 +1,10 @@
 import React from "react";
 
-const Header = ({ setHowToModalOpen }) => {
+const Header = ({
+  setHowToModalOpen,
+  setSettingsModalOpen,
+  setStatsModalOpen,
+}) => {
   return (
     <header className="header">
       <button className="headerTag" onClick={setHowToModalOpen}>
@@ -19,7 +23,7 @@ const Header = ({ setHowToModalOpen }) => {
 
       <h1>WORDLE</h1>
       <div>
-        <button className="headerTag">
+        <button className="headerTag" onClick={setStatsModalOpen}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -32,7 +36,7 @@ const Header = ({ setHowToModalOpen }) => {
             ></path>
           </svg>
         </button>
-        <button className="headerTag">
+        <button className="headerTag" onClick={setSettingsModalOpen}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"

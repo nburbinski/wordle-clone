@@ -9,6 +9,7 @@ import { getWordOfDay } from "./util/wordOfTheDay";
 import "./index.css";
 import Alert from "./components/Alert";
 import HowToModal from "./components/modals/HowToModal";
+import SettingsModal from "./components/modals/SettingsModal";
 
 const App = () => {
   const [currentGuess, setCurrentGuess] = useState("");
@@ -18,6 +19,8 @@ const App = () => {
   const [correctWord, setCorrectWord] = useState("");
   const [error, setError] = useState("");
   const [howToModalOpen, setHowToModalOpen] = useState(false);
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+  const [statsModalOpen, setStatsModalOpen] = useState(false);
 
   useEffect(() => {
     setCorrectWord(getWordOfDay);
@@ -68,12 +71,20 @@ const App = () => {
 
   return (
     <div className="wordle">
-      <Header setHowToModalOpen={setHowToModalOpen}></Header>
+      <Header
+        setHowToModalOpen={setHowToModalOpen}
+        setSettingsModalOpen={setSettingsModalOpen}
+        setStatsModalOpen={setStatsModalOpen}
+      ></Header>
       <Alert message={error}></Alert>
       <HowToModal
         setOpen={setHowToModalOpen}
         open={howToModalOpen}
       ></HowToModal>
+      <SettingsModal
+        setOpen={setSettingsModalOpen}
+        open={settingsModalOpen}
+      ></SettingsModal>
       <Board
         currentGuess={currentGuess}
         guesses={guesses}
