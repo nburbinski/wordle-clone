@@ -29,27 +29,61 @@ export const alphabet = [
   "BACK",
 ];
 
-export const statusOfLetters = Array.from(alphabet);
+export const keyboardAlphabet = [
+  "Q",
+  "W",
+  "E",
+  "R",
+  "T",
+  "Y",
+  "U",
+  "I",
+  "O",
+  "P",
+  "A",
+  "S",
+  "D",
+  "F",
+  "G",
+  "H",
+  "J",
+  "K",
+  "L",
+  "Z",
+  "X",
+  "C",
+  "V",
+  "B",
+  "N",
+  "M",
+];
 
-export const status = (guess, correctWord) => {
+export const status = (
+  guess,
+  correctWord,
+  statusOfLetters,
+  setStatusOfLetters
+) => {
   const status = [];
+  const copyOfStatuses = [...statusOfLetters];
 
   guess.split("").map((letter, i) => {
     const index = correctWord.indexOf(letter);
-
     if (index > -1) {
       if (index == i) {
-        statusOfLetters[statusOfLetters.indexOf(letter)] = "YES";
+        copyOfStatuses[statusOfLetters.indexOf(letter)] = "YES";
+
         status.push("YES");
       } else {
         status.push("KINDA");
-        statusOfLetters[statusOfLetters.indexOf(letter)] = "KINDA";
+        copyOfStatuses[statusOfLetters.indexOf(letter)] = "KINDA";
       }
     } else {
-      statusOfLetters[statusOfLetters.indexOf(letter)] = "NO";
+      copyOfStatuses[statusOfLetters.indexOf(letter)] = "NO";
       status.push("NO");
     }
   });
+  setStatusOfLetters(copyOfStatuses);
 
   return [status];
 };
