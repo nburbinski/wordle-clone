@@ -30,7 +30,6 @@ const App = () => {
 
   // On date change
   const onDateChange = (newDate) => {
-    console.log(newDate);
     const date = new Date(newDate) || new Date();
 
     if (
