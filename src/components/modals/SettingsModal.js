@@ -24,7 +24,14 @@ const SettingsModal = ({
                 <input
                   id="date"
                   type="date"
-                  defaultValue={new Date().toISOString().split("T")[0]}
+                  defaultValue={
+                    new Date(
+                      new Date().getTime() -
+                        new Date().getTimezoneOffset() * 60 * 1000
+                    )
+                      .toISOString()
+                      .split("T")[0]
+                  }
                   onChange={(e) => setDateValue(e.target.value)}
                 ></input>
                 <button
