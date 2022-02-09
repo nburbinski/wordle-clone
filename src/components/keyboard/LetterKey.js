@@ -1,7 +1,7 @@
 import React from "react";
-import { statusOfLetters, alphabet } from "../../util/status";
+import { alphabet } from "../../util/status";
 
-const Button = ({ onClick, letter }) => {
+const Button = ({ onClick, letter, statusOfLetters }) => {
   const status = statusOfLetters[alphabet.indexOf(letter)];
 
   const handleClick = (e) => {
