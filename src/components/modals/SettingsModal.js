@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
-const SettingsModal = ({ open, setOpen }) => {
+const SettingsModal = ({
+  open,
+  setOpen,
+  dateValue,
+  onDateChange,
+  setDateValue,
+}) => {
   if (open) {
     return (
       <div className="modal">
@@ -11,7 +17,27 @@ const SettingsModal = ({ open, setOpen }) => {
               X
             </button>
           </div>
-          <section></section>
+          <section>
+            <div>
+              <label htmlFor="date">Date: </label>
+              <div>
+                <input
+                  id="date"
+                  type="date"
+                  defaultValue={new Date().toISOString().split("T")[0]}
+                  onChange={(e) => setDateValue(e.target.value)}
+                ></input>
+                <button
+                  type="submit"
+                  htmlFor="date"
+                  onClick={(e) => onDateChange(dateValue)}
+                >
+                  change
+                </button>
+                <p>CHANGING THE DATE WILL RESET CURRENT GAME</p>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     );

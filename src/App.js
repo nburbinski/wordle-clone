@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Keyboard from "./components/keyboard/Keyboard";
 import { POSSIBLEWORDS } from "./const/POSSIBLEWORDS";
 import { ACTUALWORDS } from "./const/ACTUALWORDS";
-import { status } from "./util/status";
+import { alphabet, status } from "./util/status";
 import { getWordOfDay } from "./util/wordOfTheDay";
 import "./index.css";
 import Alert from "./components/Alert";
@@ -21,10 +21,42 @@ const App = () => {
   const [howToModalOpen, setHowToModalOpen] = useState(false);
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
   const [statsModalOpen, setStatsModalOpen] = useState(false);
+  const [dateValue, setDateValue] = useState(new Date());
+  const [statusOfLetters, setStatusOfLetters] = useState(Array.from(alphabet));
 
   useEffect(() => {
-    setCorrectWord(getWordOfDay);
+    setCorrectWord(getWordOfDay(new Date()));
   }, []);
+
+  // On date change
+  const onDateChange = (newDate) => {
+    console.log(newDate);
+    const date = new Date(newDate) || new Date();
+
+    if (
+      date < new Date("June 19, 2021 00:00:00") ||
+      date > new Date("October 20, 2027 00:00:00")
+    ) {
+      errorMessage("Date not within bounds");
+      console.log("Date not within bounds");
+      return;
+    }
+
+    setDateValue(date);
+    setCorrectWord(getWordOfDay(date));
+
+    // Reset current game state
+    resetGame();
+  };
+
+  // Reset current game state
+  const resetGame = () => {
+    setCurrentGuess("");
+    setGuesses([]);
+    setStatuses([]);
+    setStatusOfLetters(Array.from(alphabet));
+    setGameOver(false);
+  };
 
   // Changes error state
   const errorMessage = (message) => {
@@ -63,7 +95,10 @@ const App = () => {
       setGameOver(true);
     }
 
-    setStatuses([...statuses, status(currentGuess, correctWord)]);
+    setStatuses([
+      ...statuses,
+      status(currentGuess, correctWord, statusOfLetters, setStatusOfLetters),
+    ]);
 
     setGuesses([...guesses, currentGuess]);
     setCurrentGuess("");
@@ -84,6 +119,9 @@ const App = () => {
       <SettingsModal
         setOpen={setSettingsModalOpen}
         open={settingsModalOpen}
+        dateValue={dateValue}
+        setDateValue={setDateValue}
+        onDateChange={onDateChange}
       ></SettingsModal>
       <Board
         currentGuess={currentGuess}
@@ -95,6 +133,7 @@ const App = () => {
         onEnter={onEnter}
         onChar={onChar}
         guesses={guesses}
+        statusOfLetters={statusOfLetters}
       ></Keyboard>
     </div>
   );
